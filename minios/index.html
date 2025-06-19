@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#inicio" class="logo" data-target="inicio">aaaa</a> <ul>
+                <li><a href="#inicio" data-target="inicio">Nuestra Historia</a></li>
+                <li><a href="#momentos" data-target="momentos">Momentos</a></li>
+                <li><a href="#suenos" data-target="suenos">Sueños</a></li>
+                <li><a href="#mensaje" data-target="mensaje">Para Ti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="page-container">
+
+        <section id="inicio" class="page active">
+            <div class="home-layout">
+                <div class="photo-container">
+                    <div class="photo-frame"></div>
+                    <div class="photo-caption">Donde todo comenzó...</div>
+                </div>
+                <div class="tree-container">
+                    <svg class="heart-tree" viewBox="0 0 300 340">
+                        <!-- Tronco -->
+                        <path d="M150 260 Q145 200 155 140 Q160 100 150 60" class="trunk"/>
+                        <path d="M150 260 L150 320" class="trunk-base"/>
+                        <!-- Corazones grandes -->
+                        <path class="heart-leaf" style="--d:0s" d="M110 110 Q90 80 130 80 Q170 80 150 110 Q130 140 110 110 Z" />
+                        <path class="heart-leaf" style="--d:0.3s" d="M190 110 Q210 80 170 80 Q130 80 150 110 Q170 140 190 110 Z" />
+                        <!-- Corazones medianos -->
+                        <path class="heart-leaf" style="--d:0.5s" d="M130 70 Q120 50 150 50 Q180 50 170 70 Q160 90 130 70 Z" />
+                        <path class="heart-leaf" style="--d:0.7s" d="M170 70 Q180 50 150 50 Q120 50 130 70 Q140 90 170 70 Z" />
+                        <!-- Corazones pequeños -->
+                        <path class="heart-leaf" style="--d:0.9s" d="M100 150 Q90 140 110 140 Q130 140 120 150 Q110 160 100 150 Z" />
+                        <path class="heart-leaf" style="--d:0.2s" d="M200 150 Q210 140 190 140 Q170 140 180 150 Q190 160 200 150 Z" />
+                        <path class="heart-leaf" style="--d:0.4s" d="M150 120 Q140 110 160 110 Q180 110 170 120 Q160 130 150 120 Z" />
+                    </svg>
+                    <div class="tree-text">Nuestro amor crece cada día</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="momentos" class="page">
+            <div class="page-content">
+                <h2>Momentos Inolvidables</h2>
+                <p class="subtitle">Una colección de nuestras aventuras juntos.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=1" alt="Foto de la pareja 1"></div>
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=2" alt="Foto de la pareja 2"></div>
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=3" alt="Foto de la pareja 3"></div>
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=4" alt="Foto de la pareja 4"></div>
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=5" alt="Foto de la pareja 5"></div>
+                    <div class="gallery-item"><img src="https://picsum.photos/400/500?random=6" alt="Foto de la pareja 6"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="suenos" class="page">
+            <div class="page-content">
+                <h2>Nuestros Sueños Juntos</h2>
+                <p class="subtitle">Todo lo que queremos construir, lado a lado.</p>
+                <div class="dreams-container">
+                    <div class="dream-card">✈️<h4>Viajar por el Mundo</h4><p>Desde las playas de Tailandia hasta las auroras boreales en Noruega.</p></div>
+                    <div class="dream-card">🏡<h4>Nuestro Propio Hogar</h4><p>Un lugar lleno de risas, libros, y el olor a café por la mañana.</p></div>
+                    <div class="dream-card">🐾<h4>Adoptar un Amigo Fiel</h4><p>Darle un hogar a un perrito o gatito que nos llene de alegría.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mensaje" class="page">
+            <div class="page-content">
+                <h2>Un Mensaje Para Ti...</h2>
+                <blockquote class="love-message">
+                    "Cada día a tu lado es mi nueva aventura favorita. Gracias por llenar mi vida de luz, por cada risa y por ser mi calma en medio de cualquier tormenta. Este es solo el comienzo de nuestra historia, y no puedo esperar a escribir cada página contigo."
+                    <cite>– Con todo mi amor</cite>
+                </blockquote>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="script.js"></script>
+    <div id="heart-transition-overlay">
+        <svg viewBox="0 0 400 400" class="heart-svg">
+            <path 
+                d="M200 350 
+                   C 120 290, 40 210, 80 130 
+                   C 120 60, 200 100, 200 130 
+                   C 200 100, 280 60, 320 130 
+                   C 360 210, 280 290, 200 350 Z"
+                fill="#e53935"/>
+        </svg>
+    </div>
+</body>
+</html>
