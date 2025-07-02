@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego: Áreas Naturales Protegidas del Perú</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para el juego */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F0F9FF; /* Azul cielo muy claro */
+        }
+        h1, h2 {
+            font-family: 'Fredoka One', cursive;
+        }
+        .droppable-zone {
+            background-color: #FFFFFF;
+            border: 3px dashed #93C5FD; /* Borde discontinuo azul */
+            min-height: 150px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .droppable-zone.drag-over {
+            background-color: #DBEAFE; /* Azul más claro al arrastrar sobre él */
+            border-color: #3B82F6;
+        }
+        .draggable-card {
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s;
+            user-select: none;
+            background-color: #FEF3C7; /* Amarillo pastel */
+            border: 2px solid #FBBF24; /* Borde amarillo */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .draggable-card:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .draggable-card.correct {
+            background-color: #D1FAE5; /* Verde menta */
+            border-color: #34D399; /* Borde verde */
+            cursor: default;
+        }
+        .draggable-card.incorrect-drop {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .modal {
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            animation: bounce-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes bounce-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl text-blue-600 mb-2">¡Aventura por el Perú!</h1>
+        <p class="text-lg text-gray-700 mb-6">Arrastra cada área protegida a su grupo correcto. ¡Tú puedes!</p>
+
+        <!-- Contenedor de las tarjetas para arrastrar -->
+        <div id="cards-container" class="mb-8 p-4 bg-blue-100 rounded-xl shadow-md flex flex-wrap justify-center items-center gap-3">
+            <!-- Las tarjetas se insertarán aquí con JavaScript -->
+        </div>
+
+        <!-- Contenedores para soltar las tarjetas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="category-container" data-category="Parques Nacionales">
+                <h2 class="text-2xl text-white bg-green-500 p-3 rounded-t-lg">Parques Nacionales</h2>
+                <div class="droppable-zone p-4 rounded-b-lg space-y-2"></div>
+            </div>
+            <div class="category-container" data-category="Reservas Nacionales">
+                <h2 class="text-2xl text-white bg-blue-500 p-3 rounded-t-lg">Reservas Nacionales</h2>
+                <div class="droppable-zone p-4 rounded-b-lg space-y-2"></div>
+            </div>
+            <div class="category-container" data-category="Santuarios Nacionales">
+                <h2 class="text-2xl text-white bg-yellow-500 p-3 rounded-t-lg">Santuarios Nacionales</h2>
+                <div class="droppable-zone p-4 rounded-b-lg space-y-2"></div>
+            </div>
+            <div class="category-container" data-category="Santuarios Históricos">
+                <h2 class="text-2xl text-white bg-red-500 p-3 rounded-t-lg">Santuarios Históricos</h2>
+                <div class="droppable-zone p-4 rounded-b-lg space-y-2"></div>
+            </div>
+            <div class="category-container" data-category="Cotos de Caza">
+                <h2 class="text-2xl text-white bg-purple-500 p-3 rounded-t-lg">Cotos de Caza</h2>
+                <div class="droppable-zone p-4 rounded-b-lg space-y-2"></div>
+            </div>
+            <div class="flex justify-center items-center">
+                 <button id="reset-button" class="mt-4 px-8 py-4 bg-indigo-600 text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 transition transform hover:scale-105 focus:outline-none">
+                    ¡Jugar de Nuevo!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Victoria -->
+    <div id="win-modal" class="modal fixed inset-0 flex items-center justify-center hidden">
+        <div class="modal-content bg-white p-8 rounded-2xl shadow-2xl text-center max-w-sm mx-auto transform">
+            <h2 class="text-4xl font-bold text-yellow-500 mb-4">¡FELICITACIONES!</h2>
+            <p class="text-lg text-gray-700 mb-6">¡Has completado el mapa de las Áreas Protegidas del Perú! Eres un verdadero explorador.</p>
+            <button id="play-again-button" class="px-6 py-3 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 transition transform hover:scale-105 focus:outline-none">
+                Jugar Otra Vez
+            </button>
+        </div>
+    </div>
+    
+    <!-- Modal de Dato Curioso con Gemini -->
+    <div id="fact-modal" class="modal fixed inset-0 flex items-center justify-center hidden">
+        <div id="fact-modal-content" class="modal-content bg-white p-8 rounded-2xl shadow-2xl text-center max-w-md mx-auto transform relative">
+             <button id="close-fact-modal" class="absolute top-2 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+            <h2 id="fact-modal-title" class="text-3xl font-bold text-cyan-600 mb-4">Dato Curioso</h2>
+            <div id="fact-modal-body" class="text-lg text-gray-700 mb-6 min-h-[100px] flex items-center justify-center">
+                 <div class="loader hidden"></div>
+                 <p id="fact-text"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATOS DEL JUEGO ---
+            const protectedAreas = [
+                { name: 'Güeppi-Sekime', category: 'Parques Nacionales' },
+                { name: 'Río Abiseo', category: 'Parques Nacionales' },
+                { name: 'Tingo María', category: 'Parques Nacionales' },
+                { name: 'Cordillera Azul', category: 'Parques Nacionales' },
+                { name: 'Cerros de Amotape', category: 'Parques Nacionales' },
+                { name: 'Huascarán', category: 'Parques Nacionales' },
+                { name: 'Manu', category: 'Parques Nacionales' },
+                { name: 'Dorsal de Nasca', category: 'Reservas Nacionales' },
+                { name: 'Tumbes', category: 'Reservas Nacionales' },
+                { name: 'Salinas y Aguada Blanca', category: 'Reservas Nacionales' },
+                { name: 'Paracas', category: 'Reservas Nacionales' },
+                { name: 'Pampa Galeras Barbara D\'Achille', category: 'Reservas Nacionales' },
+                { name: 'Pacaya Samiria', category: 'Reservas Nacionales' },
+                { name: 'Tambopata', category: 'Reservas Nacionales' },
+                { name: 'Cordillera de Colán', category: 'Santuarios Nacionales' },
+                { name: 'Tabaconas Namballe', category: 'Santuarios Nacionales' },
+                { name: 'Los Manglares de Tumbes', category: 'Santuarios Nacionales' },
+                { name: 'Lagunas de Mejía', category: 'Santuarios Nacionales' },
+                { name: 'Calipuy', category: 'Santuarios Nacionales' },
+                { name: 'Machupicchu', category: 'Santuarios Históricos' },
+                { name: 'Pampa de Ayacucho', category: 'Santuarios Históricos' },
+                { name: 'Chacamarca', category: 'Santuarios Históricos' },
+                { name: 'Bosque de Pómac', category: 'Santuarios Históricos' },
+                { name: 'Sunchubamba', category: 'Cotos de Caza' },
+                { name: 'El Angolo', category: 'Cotos de Caza' },
+            ];
+
+            const cardsContainer = document.getElementById('cards-container');
+            const droppableZones = document.querySelectorAll('.droppable-zone');
+            const winModal = document.getElementById('win-modal');
+            const factModal = document.getElementById('fact-modal');
+            const factModalTitle = document.getElementById('fact-modal-title');
+            const factText = document.getElementById('fact-text');
+            const loader = factModal.querySelector('.loader');
+
+            let correctPlacements = 0;
+            let totalCards = protectedAreas.length;
+
+            // --- INICIALIZACIÓN DEL JUEGO ---
+            function initializeGame() {
+                correctPlacements = 0;
+                cardsContainer.innerHTML = '';
+                droppableZones.forEach(zone => zone.innerHTML = '');
+                winModal.classList.add('hidden');
+                factModal.classList.add('hidden');
+
+                const shuffledAreas = [...protectedAreas].sort(() => Math.random() - 0.5);
+                
+                shuffledAreas.forEach((area, index) => {
+                    const card = document.createElement('div');
+                    card.id = `card-${index}`;
+                    card.className = 'draggable-card p-2 rounded-lg font-semibold text-gray-800 shadow-md';
+                    card.draggable = true;
+                    
+                    const cardName = document.createElement('span');
+                    cardName.textContent = area.name;
+                    card.appendChild(cardName);
+
+                    card.dataset.category = area.category;
+                    cardsContainer.appendChild(card);
+
+                    card.addEventListener('dragstart', handleDragStart);
+                    card.addEventListener('dragend', handleDragEnd);
+                });
+            }
+
+            // --- LÓGICA DE ARRASTRAR Y SOLTAR (DRAG & DROP) ---
+            function handleDragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.id);
+                e.dataTransfer.effectAllowed = 'move';
+                setTimeout(() => {
+                    e.target.classList.add('opacity-50');
+                }, 0);
+            }
+
+            function handleDragEnd(e) {
+                e.target.classList.remove('opacity-50');
+            }
+
+            droppableZones.forEach(zone => {
+                zone.addEventListener('dragenter', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+                zone.addEventListener('dragover', (e) => { e.preventDefault(); });
+                zone.addEventListener('dragleave', () => { zone.classList.remove('drag-over'); });
+                zone.addEventListener('drop', handleDrop);
+            });
+
+            function handleDrop(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+
+                const cardId = e.dataTransfer.getData('text/plain');
+                const draggedCard = document.getElementById(cardId);
+                const dropZoneCategory = this.parentElement.dataset.category;
+                const cardCategory = draggedCard.dataset.category;
+
+                if (dropZoneCategory === cardCategory) {
+                    draggedCard.classList.add('correct');
+                    draggedCard.draggable = false;
+                    this.appendChild(draggedCard);
+                    correctPlacements++;
+                    addLearnMoreButton(draggedCard);
+                    checkWinCondition();
+                } else {
+                    draggedCard.classList.add('incorrect-drop');
+                    setTimeout(() => {
+                        draggedCard.classList.remove('incorrect-drop');
+                    }, 500);
+                }
+            }
+
+            // --- LÓGICA DEL JUEGO Y GEMINI ---
+            function addLearnMoreButton(card) {
+                const areaName = card.querySelector('span').textContent;
+                const button = document.createElement('button');
+                button.innerHTML = '✨';
+                button.className = 'ml-2 text-2xl hover:scale-125 transition-transform';
+                button.title = `Aprender más sobre ${areaName}`;
+                button.onclick = () => getFunFact(areaName);
+                card.appendChild(button);
+            }
+
+            async function getFunFact(areaName) {
+                factModalTitle.textContent = `Dato Curioso de ${areaName}`;
+                factText.textContent = '';
+                loader.classList.remove('hidden');
+                factModal.classList.remove('hidden');
+
+                // --- PROMPT MODIFICADO ---
+                const prompt = `Actúa como un guía de naturaleza amigable para niños. Dame un dato curioso sobre "${areaName}" en Perú. Primero, dime en qué departamento o región se encuentra. Segundo, menciona un animal o planta importante que se protege allí. Tercero, añade un hecho sorprendente sobre ese lugar o especie. Hazlo todo en dos o tres frases cortas.`;
+                const apiKey = ""; // Se deja vacío para que el entorno lo gestione
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                try {
+                    const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Error de red: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        factText.textContent = text;
+                    } else {
+                        throw new Error("No se recibió contenido válido de la API.");
+                    }
+
+                } catch (error) {
+                    console.error("Error al llamar a la API de Gemini:", error);
+                    factText.textContent = "¡Uy! No pudimos encontrar un dato curioso en este momento. ¡Inténtalo de nuevo más tarde!";
+                } finally {
+                    loader.classList.add('hidden');
+                }
+            }
+            
+            function checkWinCondition() {
+                if (correctPlacements === totalCards) {
+                    setTimeout(() => {
+                         winModal.classList.remove('hidden');
+                    }, 500);
+                }
+            }
+            
+            function resetGame() {
+                initializeGame();
+            }
+
+            // --- ASIGNACIÓN DE EVENTOS ---
+            document.getElementById('reset-button').addEventListener('click', resetGame);
+            document.getElementById('play-again-button').addEventListener('click', resetGame);
+            document.getElementById('close-fact-modal').addEventListener('click', () => factModal.classList.add('hidden'));
+            factModal.addEventListener('click', (e) => {
+                if (e.target.id === 'fact-modal') {
+                    factModal.classList.add('hidden');
+                }
+            });
+
+            // --- Iniciar el juego por primera vez ---
+            initializeGame();
+        });
+    </script>
+</body>
+</html>
