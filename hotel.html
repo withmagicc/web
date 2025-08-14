@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Paraíso - Tu Destino de Ensueño</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg {
+            background-image: url('https://placehold.co/1920x1080/000000/FFFFFF?text=Vista+del+Hotel');
+            background-size: cover;
+            background-position: center;
+        }
+        .gallery-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header y Navegación -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="text-2xl font-display text-amber-600">Hotel Paraíso</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-gray-600 hover:text-amber-600 transition duration-300">Inicio</a>
+                <a href="#habitaciones" class="text-gray-600 hover:text-amber-600 transition duration-300">Habitaciones</a>
+                <a href="#servicios" class="text-gray-600 hover:text-amber-600 transition duration-300">Servicios</a>
+                <a href="#galeria" class="text-gray-600 hover:text-amber-600 transition duration-300">Galería</a>
+                <a href="#nosotros" class="text-gray-600 hover:text-amber-600 transition duration-300">Sobre Nosotros</a>
+                <a href="#contacto" class="text-gray-600 hover:text-amber-600 transition duration-300">Contacto</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#inicio" class="block py-2 px-4 text-sm hover:bg-amber-50">Inicio</a>
+            <a href="#habitaciones" class="block py-2 px-4 text-sm hover:bg-amber-50">Habitaciones</a>
+            <a href="#servicios" class="block py-2 px-4 text-sm hover:bg-amber-50">Servicios</a>
+            <a href="#galeria" class="block py-2 px-4 text-sm hover:bg-amber-50">Galería</a>
+            <a href="#nosotros" class="block py-2 px-4 text-sm hover:bg-amber-50">Sobre Nosotros</a>
+            <a href="#contacto" class="block py-2 px-4 text-sm hover:bg-amber-50">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección de Inicio (Hero) -->
+        <section id="inicio" class="hero-bg text-white h-[calc(100vh-80px)] flex items-center justify-center">
+            <div class="bg-black bg-opacity-50 p-10 rounded-lg text-center">
+                <h1 class="text-5xl md:text-7xl font-display mb-4">Bienvenido al Hotel Paraíso</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl">Donde el lujo se encuentra con la comodidad. Tu escapada perfecta te espera.</p>
+                <a href="#habitaciones" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">
+                    Explorar Habitaciones
+                </a>
+            </div>
+        </section>
+
+        <!-- Sección de Habitaciones -->
+        <section id="habitaciones" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-display text-center mb-12">Nuestras Habitaciones</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Habitación Estándar -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/e2e8f0/333333?text=Habitación+Estándar" alt="Habitación Estándar" class="w-full h-64 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-display mb-2">Habitación Estándar</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Perfecta para viajeros solos o parejas. Cómoda y equipada con todo lo esencial.</p>
+                            <ul class="text-gray-600 list-disc list-inside mb-6">
+                                <li>Cama Queen Size</li>
+                                <li>Wi-Fi de alta velocidad</li>
+                                <li>TV de 40" con cable</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <a href="javascript:void(0)" onclick="reservarPorWhatsApp('Habitación Estándar')" class="w-full text-center block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-md transition duration-300">
+                                    Reservar Ahora
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Habitación Deluxe -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/d1d5db/333333?text=Habitación+Deluxe" alt="Habitación Deluxe" class="w-full h-64 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-display mb-2">Habitación Deluxe</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Más espacio y vistas impresionantes de la ciudad o el mar. Ideal para una estancia memorable.</p>
+                             <ul class="text-gray-600 list-disc list-inside mb-6">
+                                <li>Cama King Size</li>
+                                <li>Balcón privado</li>
+                                <li>Minibar incluido</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <a href="javascript:void(0)" onclick="reservarPorWhatsApp('Habitación Deluxe')" class="w-full text-center block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-md transition duration-300">
+                                    Reservar Ahora
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Suite Presidencial -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/b5bac1/333333?text=Suite+Presidencial" alt="Suite Presidencial" class="w-full h-64 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-display mb-2">Suite Presidencial</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">La máxima expresión del lujo. Sala de estar separada y amenidades exclusivas.</p>
+                             <ul class="text-gray-600 list-disc list-inside mb-6">
+                                <li>Jacuzzi privado</li>
+                                <li>Servicio a la habitación 24h</li>
+                                <li>Acceso al lounge ejecutivo</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <a href="javascript:void(0)" onclick="reservarPorWhatsApp('Suite Presidencial')" class="w-full text-center block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-md transition duration-300">
+                                    Reservar Ahora
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Servicios -->
+        <section id="servicios" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-display text-center mb-12">Nuestros Servicios</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="text-amber-600 mb-4">
+                           <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.8 14.5c.348.348.348.914 0 1.262l-1.06 1.06c-.348.348-.914.348-1.262 0l-1.06-1.06a.89.89 0 010-1.262l1.06-1.06c.348-.348.914-.348 1.262 0l1.06 1.06zM16.2 14.5c.348.348.348.914 0 1.262l-1.06 1.06c-.348.348-.914.348-1.262 0l-1.06-1.06a.89.89 0 010-1.262l1.06-1.06c.348-.348.914-.348 1.262 0l1.06 1.06zM12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Piscina Infinita</h3>
+                        <p class="text-gray-600">Relájate y disfruta del sol en nuestra espectacular piscina con vistas panorámicas.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="text-amber-600 mb-4">
+                           <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.424V8.586a2 2 0 00-2-2H5a2 2 0 00-2 2v6.838a2 2 0 00.586 1.414l2.828 2.828A2 2 0 007.828 21h8.344a2 2 0 001.414-.586l2.828-2.828A2 2 0 0021 15.424zM8 11h8m-8 4h.01M12 3v3.586"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Restaurante Gourmet</h3>
+                        <p class="text-gray-600">Una experiencia culinaria inolvidable con platillos locales e internacionales.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="text-amber-600 mb-4">
+                           <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M15.75 12h.01M11.25 6h.01M4.5 12h.01M8.25 18h.01M4.5 6h.01"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Wi-Fi Gratuito</h3>
+                        <p class="text-gray-600">Mantente conectado en todo momento con nuestro servicio de internet de alta velocidad.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="text-amber-600 mb-4">
+                           <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L3 12.5l6.75-4.5M14.25 17l6.75-4.5-6.75-4.5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Gimnasio Moderno</h3>
+                        <p class="text-gray-600">Equipado con la última tecnología para que no pierdas tu rutina de ejercicios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Galería -->
+        <section id="galeria" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-display text-center mb-12">Galería de Momentos</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid gap-4">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/f3f4f6/333333?text=Piscina" alt="Piscina del hotel">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/e5e7eb/333333?text=Lobby" alt="Lobby del hotel">
+                    </div>
+                    <div class="grid gap-4">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/d1d5db/333333?text=Restaurante" alt="Restaurante del hotel">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/9ca3af/333333?text=Vista+Exterior" alt="Vista exterior del hotel">
+                    </div>
+                    <div class="grid gap-4">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/6b7280/FFFFFF?text=Detalle+Habitación" alt="Detalle de una habitación">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/4b5563/FFFFFF?text=Bar" alt="Bar del hotel">
+                    </div>
+                    <div class="grid gap-4">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x500/374151/FFFFFF?text=Gimnasio" alt="Gimnasio del hotel">
+                        <img class="h-auto max-w-full rounded-lg gallery-img" src="https://placehold.co/500x800/1f2937/FFFFFF?text=Atardecer" alt="Atardecer desde el hotel">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sobre Nosotros -->
+        <section id="nosotros" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/ffffff/333333?text=Nuestro+Equipo" alt="Equipo del Hotel Paraíso" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-4xl font-display mb-6">Nuestra Historia</h2>
+                        <p class="text-gray-600 mb-4">
+                            Fundado en 2010, el Hotel Paraíso nació de un sueño: crear un oasis de paz y lujo en el corazón de la ciudad. Nuestra misión es ofrecer una hospitalidad excepcional y crear experiencias inolvidables para cada uno de nuestros huéspedes.
+                        </p>
+                        <p class="text-gray-600">
+                            Creemos en el servicio personalizado, la atención al detalle y un compromiso constante con la excelencia. Más que un hotel, somos un hogar lejos de casa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-display text-center mb-12">Contáctanos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Formulario de Contacto -->
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-md transition duration-300">
+                                Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Información y Mapa -->
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Información de Contacto</h3>
+                            <p class="text-gray-600"><strong>Dirección:</strong> Av. Principal 123, Ciudad Paraíso</p>
+                            <p class="text-gray-600"><strong>Teléfono:</strong> +1 (234) 567-890</p>
+                            <p class="text-gray-600"><strong>Email:</strong> reservas@hotelparaiso.com</p>
+                        </div>
+                        <div>
+                           <div class="h-64 md:h-full w-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                <p class="text-gray-500">[Aquí iría un mapa interactivo]</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-display text-2xl text-amber-500 mb-4">Hotel Paraíso</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-amber-500 transition duration-300">Facebook</a>
+                <a href="#" class="hover:text-amber-500 transition duration-300">Instagram</a>
+                <a href="#" class="hover:text-amber-500 transition duration-300">Twitter</a>
+            </div>
+            <p class="text-gray-400 text-sm">&copy; 2024 Hotel Paraíso. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Función para reservar por WhatsApp
+        function reservarPorWhatsApp(tipoHabitacion) {
+            // IMPORTANTE: Reemplaza '1234567890' con tu número de WhatsApp real, incluyendo el código de país sin el '+'.
+            const numeroTelefono = '1234567890'; 
+            const mensaje = `Hola, quiero reservar la ${tipoHabitacion}.`;
+            const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+
+        // Script para el menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cierra el menú móvil al hacer clic en un enlace
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileMenuLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+    </script>
+
+</body>
+</html>
