@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nawj - Moda Sostenible y Creativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos para fuentes personalizadas */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair+Display', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <!-- Header y Navegación -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-emerald-800 tracking-wider"><img src="./logo.png" alt="" style="max-width: 90px;"></a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#productos" class="text-stone-600 hover:text-emerald-700 transition duration-300">Productos</a>
+                <a href="#nosotros" class="text-stone-600 hover:text-emerald-700 transition duration-300">Nosotros</a>
+                <a href="#contacto" class="bg-emerald-600 text-white py-2 px-5 rounded-full hover:bg-emerald-700 transition duration-300">Contacto</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-stone-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#productos" class="block py-2 px-4 text-sm text-stone-600 hover:bg-emerald-50">Productos</a>
+            <a href="#nosotros" class="block py-2 px-4 text-sm text-stone-600 hover:bg-emerald-50">Sobre Nosotros</a>
+            <a href="#contacto" class="block py-2 px-4 text-sm text-stone-600 hover:bg-emerald-50">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Principal (Hero) -->
+        <section class="relative h-[70vh] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1562742769-372322359924?q=80&w=1974&auto=format&fit=crop');">
+            <div class="absolute inset-0 hero-gradient"></div>
+            <div class="relative container mx-auto px-6 h-full flex flex-col justify-center items-start text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 max-w-xl">El Arte de Re-imaginar</h1>
+                <p class="text-lg md:text-xl max-w-xl mb-8">Piezas únicas con alma sostenible, creadas a partir de materiales reciclados.</p>
+                <a href="#productos" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Ver Colección</a>
+            </div>
+        </section>
+
+        <!-- Sección de Productos -->
+        <section id="productos" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                     <h2 class="text-4xl font-bold">Nuestras Creaciones</h2>
+                     <p class="text-stone-600 mt-2">Cada artículo es una pieza de arte única y consciente con el planeta.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Producto 1: Pulsera -->
+                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden group">
+                        <img src="./2.jpeg" alt="Pulsera hecha con materiales reciclados" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">
+                        <div class="p-6 relative">
+                            <h3 class="text-2xl font-bold mb-2">Pulseras con Encanto</h3>
+                            <p class="text-stone-600 mb-4 text-sm">Hechas a mano con plásticos y metales recuperados.</p>
+                            <span class="text-2xl font-bold text-emerald-800">s/. 15.00</span>
+                            <a href="https://wa.me/51999999999?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20Pulseras%20con%20Encanto" target="_blank" class="mt-4 w-full bg-emerald-600 text-white py-2 px-4 rounded-lg flex items-center justify-center hover:bg-emerald-700 transition duration-300">
+                                Comprar
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2: Aretes -->
+                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden group">
+                        <img src="./4.jpeg" alt="Aretes hechos con materiales reciclados" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Aretes de Diseño</h3>
+                            <p class="text-stone-600 mb-4 text-sm">Desde vidrio pulido hasta retazos de tela.</p>
+                            <span class="text-2xl font-bold text-emerald-800">s/. 12.00</span>
+                             <a href="https://wa.me/51999999999?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20Aretes%20de%20Diseño" target="_blank" class="mt-4 w-full bg-emerald-600 text-white py-2 px-4 rounded-lg flex items-center justify-center hover:bg-emerald-700 transition duration-300">
+                                Comprar
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3: Ropa -->
+                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden group">
+                        <img src="https://placehold.co/600x400/a3b18a/344e41?text=Roponcio" alt="Ropa rediseñada a partir de otras prendas" class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2">Roponcio</h3>
+                            <p class="text-stone-600 mb-4 text-sm">Damos una segunda vida a la ropa con diseños exclusivos.</p>
+                            <span class="text-2xl font-bold text-emerald-800">s/. 45.00</span>
+                             <a href="https://wa.me/51999999999?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20Ropa%20Renovada" target="_blank" class="mt-4 w-full bg-emerald-600 text-white py-2 px-4 rounded-lg flex items-center justify-center hover:bg-emerald-700 transition duration-300">
+                                Comprar
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sobre Nosotros -->
+        <section id="nosotros" class="py-24 bg-emerald-50/50">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/588157/ffffff?text=Nuestro+Taller" class="rounded-lg shadow-xl" alt="Taller de nawj" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Imagen+no+disponible';">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold mb-4">Nuestra Misión es Re-imaginar</h2>
+                    <p class="text-stone-700 mb-4">
+                        En nawj, creemos que la basura de uno es el tesoro de otro. Nacimos de la pasión por el diseño y el profundo respeto por nuestro planeta. Cada pieza que creamos no solo es un accesorio, sino una declaración de principios.
+                    </p>
+                    <p class="text-stone-700">
+                        Utilizamos técnicas artesanales para transformar materiales destinados al olvido en objetos de deseo, promoviendo un ciclo de consumo más consciente y responsable.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contacto -->
+        <section id="contacto" class="py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4">¿Hablamos?</h2>
+                <p class="text-stone-600 mb-8 max-w-2xl mx-auto">Si quieres una pieza personalizada, colaborar o simplemente saludarnos, este es el lugar.</p>
+                <div class="max-w-xl mx-auto">
+                    <form action="#" method="POST" class="space-y-6">
+                        <input type="text" placeholder="Tu Nombre" class="w-full p-3 bg-stone-100 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <input type="email" placeholder="Tu Correo Electrónico" class="w-full p-3 bg-stone-100 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <textarea rows="5" placeholder="Tu Mensaje" class="w-full p-3 bg-stone-100 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-8 rounded-full transition duration-300">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 nawj. Todos los derechos reservados.</p>
+            <p class="text-sm text-stone-400 mt-1">Diseñando un futuro más verde, una pieza a la vez.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para el menú móvil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
